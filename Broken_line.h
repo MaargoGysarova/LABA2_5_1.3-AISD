@@ -2,13 +2,14 @@
 #ifndef LLABA2_5_1_BROKEN_LINE_H
 #define LLABA2_5_1_BROKEN_LINE_H
 #include "Point.h"
-
+#include <vector>
 
 
 template <class T>
 class Broken_line{
 private:
-    Point<T> *points;
+    
+    vector<Point<T>> points;
     unsigned int counter;
     unsigned int size;
     unsigned int grow_size;

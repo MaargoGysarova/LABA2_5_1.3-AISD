@@ -27,12 +27,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Broken_compl.h" />
     <ClInclude Include="Broken_line.h" />
     <ClInclude Include="Complex.h" />
     <ClInclude Include="ESetErrors.h" />
     <ClInclude Include="Graphics.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Broken_compl.cpp" />
     <ClCompile Include="Broken_line.cpp" />
     <ClCompile Include="Complex.cpp" />
     <ClCompile Include="ESetErrors.cpp" />
