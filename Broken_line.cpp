@@ -2,25 +2,31 @@
 #include "Point.h"
 #include "ESetErrors.h"
 #include <complex>
+#include <vector>
 
 
 
 template <class T>
-Broken_line<T>::Broken_line(unsigned int grow_size,unsigned int size):size(1),points(nullptr),counter(0),grow_size(grow_size) {
+Broken_line<T>::Broken_line(unsigned int grow_size,unsigned int size):size(1),counter(0),grow_size(grow_size) {
    this->size=size;
-   points= new Point<T>[this->size];
+   points.reserve(this->size);
 }
 
 template <class T>
 void Broken_line<T>::set_size(int new_size){
     this->size=new_size;
+    
 }
 
 template <class T>
-Point<T> &Broken_line<T>::operator[](int index)const {
+auto Broken_line<T>::operator[](int index)const {
     if (index < 0 || index > counter)
         throw out_of_range("Index out of range");
-    return points[index];
+    auto it = cbegin();
+    for (int i = 0; i < index; i++) {
+        it++;
+    }
+    return it;
 }
 
 template <class T>

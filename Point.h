@@ -4,6 +4,11 @@
 
 #include <system_error>
 #include <complex>
+#include "Point.h"
+#include <iostream>
+
+using namespace std;
+#include <vector>
 
 template <class T>
 class Point  {
@@ -14,6 +19,10 @@ public:
     T GetPointY()const;
     void SetPointX(T x);
     void SetPointY(T y);
+
+    Point(const Point &it);
+    
+
 
     explicit Point(T x=0,T y=0);
     static double GetDistance(const Point &A,const Point &B);

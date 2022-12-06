@@ -25,6 +25,15 @@ template <class T>
 void Point<T>::SetPointY(T y){this->y=y;
 }
 
+template<class T>
+Point<T>::Point(const Point &it)
+{
+	this->x = it.x;
+	this->y = it.y;
+}
+
+
+
 template <class T>
 Point<T>::Point(T x,T y){this->x=x;this->y=y;}
 

@@ -32,6 +32,7 @@
     <ClInclude Include="Complex.h" />
     <ClInclude Include="ESetErrors.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Point.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Broken_compl.cpp" />

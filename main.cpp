@@ -211,9 +211,12 @@ bool check_regular_polygon(Broken_line<T>& line) {
     //create massive of length of polygon's sides
     auto *length_of_sides = new double[line.get_counter()];
     for (int i = 0; i < line.get_counter(); i++) {
-        Point<T> A = line[i];
+        Point<T> A = *line[i];
         if (i == line.get_counter() - 1) {
-            Point <T> B= line[0];
+            auto it;
+             it = line.operator[](0);
+            Point<T> it1 = (*it);
+            Point <T> B = it1;
             length_of_sides[i] = Broken_line<T>::get_length_two_tops(A, B);
         }
         else {
