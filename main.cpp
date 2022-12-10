@@ -123,6 +123,9 @@ Broken_line<T> sum(Broken_line<T>&  line){
 	Broken_line<T> second_line = create_new_line<T>();
     print_image_first(second_line);
     _getch();
+
+
+    line + second_line;
 	line = line + second_line;
     return line;
 }
@@ -211,29 +214,23 @@ bool check_regular_polygon(Broken_line<T>& line) {
     //create massive of length of polygon's sides
     auto *length_of_sides = new double[line.get_counter()];
     for (int i = 0; i < line.get_counter(); i++) {
-        Point<T> A = *line[i];
+        Point<T> A= line[i];
         if (i == line.get_counter() - 1) {
-            auto it;
-             it = line.operator[](0);
-            Point<T> it1 = (*it);
-            Point <T> B = it1;
+            Point <T> B = line[0];
             length_of_sides[i] = Broken_line<T>::get_length_two_tops(A, B);
         }
         else {
-            Point<T> B = line[i + 1];
+            Point<T> B = line[i+1];
             length_of_sides[i] = Broken_line<T>::get_length_two_tops(A, B);
         }
     }
 	
     int index = 0;
-    //create massive of nulls
-    //привет
+   
     int index_massive = -1;
     //check if all sides are equal
     for (int i = 0; i < line.get_counter()-2; i++) {
         if (length_of_sides[0] != length_of_sides[i + 1]) {
-            index = i + 1;
-             
             index_massive++;
             break;
         }

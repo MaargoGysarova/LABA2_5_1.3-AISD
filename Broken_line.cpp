@@ -9,7 +9,6 @@
 template <class T>
 Broken_line<T>::Broken_line(unsigned int grow_size,unsigned int size):size(1),counter(0),grow_size(grow_size) {
    this->size=size;
-   points.reserve(this->size);
 }
 
 template <class T>
@@ -19,37 +18,50 @@ void Broken_line<T>::set_size(int new_size){
 }
 
 template <class T>
-auto Broken_line<T>::operator[](int index)const {
+Point<T> Broken_line<T>::operator[](int index)const {
     if (index < 0 || index > counter)
         throw out_of_range("Index out of range");
-    auto it = cbegin();
-    for (int i = 0; i < index; i++) {
-        it++;
+    auto iter = cbegin();
+    if(index == 0 ) {
+        return *iter;
     }
-    return it;
+    else {
+        iter += index;
+        return *iter;
+    }
 }
 
 template <class T>
-void Broken_line<T>::operator()(const Point<T> &value, int index) {
-	if (index < 0 || index > counter)
-		throw std::out_of_range("Index out of range");
-	
-    points[index] = value;
-}
-
+void Broken_line<T>::operator()(const Point<T>& value, int index) {
+    if (index < 0 || index > counter)
+        throw std::out_of_range("Index out of range");
+    auto iter = begin();
+    if (index == 0) {
+		*iter = value;
+    }
+    else {
+        iter += index;
+        *iter = value;
+    }
+    }
+  
+ 
 template <class T>
-Broken_line<T> &Broken_line<T>::operator+(const Broken_line<T>&second_line) {
+Broken_line<T> Broken_line<T>::operator+(const Broken_line<T>&second_line) {
     Broken_line<T> line;
-    line.points= new Point<T>[this->size+second_line.size];
-    for(int i=0;i< this->counter;i++){
-        line.points[i]=points[i];
+	line.points.reserve(this->size + second_line.size);
+    for (auto iter = cbegin(); iter != cend(); ++iter)
+     {
+     line.points.push_back(*iter);
     }
-    for(int i=0;i< second_line.get_counter(); i++) {
-        line.points[this->counter+i]=second_line.points[i];
-    }
+    for (auto iter = second_line.cbegin(); iter != second_line.cend(); ++iter)
+    {
+    line.points.push_back(*iter);
+     }
+
     line.counter = this->counter + second_line.counter;
-    line.set_size(line.counter);
-    return line;
+    line.set_size(line.counter+5);
+    return  line;
 }
 
 template <class T>
@@ -61,10 +73,12 @@ Broken_line<T> &Broken_line<T>::operator+=(const Point<T> &src)  {
             tmp[i] = points[i];
         }
         tmp[size] = src;
-        points = tmp;
+        for (int i = 0; i < this->counter; i++) {
+            points[i] = tmp[i];
+        }
     }
     else {
-        points[counter]=src;
+        points.push_back(src);
     }
     counter++;
     return *this;
@@ -89,7 +103,31 @@ Broken_line<T> &Broken_line<T>::operator+(const Point<T> &src) {
         }
     }
     this->counter++;
-    points = tmp;
+    for (int i = 0; i < this->counter; i++) {
+        points[i] = tmp[i];
+    }
+    return *this;
+}
+
+template<class T>
+Broken_line<T>& Broken_line<T>::operator=(const Broken_line<T>& scr)
+{
+    points.clear();
+	
+    this->size = scr.size;
+	//this->points.resize(this->size);
+	
+
+    
+    //for (int i = 0; i < scr.counter; i++) {
+      //  points[i] = *iter;
+      //  iter++;
+   // }
+    for (auto iter = scr.cbegin(); iter != scr.cend(); ++iter) {
+		points.push_back(*iter);
+    
+    }
+	counter = scr.counter;
     return *this;
 }
 

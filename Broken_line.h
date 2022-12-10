@@ -32,13 +32,15 @@ public:
 
      void set_size(int new_size); 
 	
-     auto operator[](int index)const; 
+     Point<T> operator[](int index)const; 
      void operator()(const Point<T>& value,int index); 
 
-     Broken_line<T>& operator+(const Broken_line<T>& second_line); 
+     Broken_line<T> operator+(const Broken_line<T>& second_line); 
 
      Broken_line<T>& operator+=(const Point<T>& src) ; 
      Broken_line<T>& operator+(const Point<T>& src); 
+
+     Broken_line<T>& operator=(const Broken_line<T>& scr);
 
      double get_length()const;
      static double get_length_two_tops(const Point<T>& A,const Point<T>& B);
