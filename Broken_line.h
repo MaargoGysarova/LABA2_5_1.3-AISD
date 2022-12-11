@@ -42,9 +42,12 @@ public:
 
      Broken_line<T>& operator=(const Broken_line<T>& scr);
 
+     void show_all_tops()const;
+
      double get_length()const;
      static double get_length_two_tops(const Point<T>& A,const Point<T>& B);
      int get_counter() const;
+  
 };
 
 

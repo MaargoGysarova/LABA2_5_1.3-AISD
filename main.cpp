@@ -167,12 +167,7 @@ double get_length(Broken_line<T>& line){
 template <class T>
 void show_all_tops(Broken_line<T>& line){
     cout << "Show all tops" << endl;
-    Point<T> tmp(0, 0);
-    for(int i=0;i<line.get_counter();i++){
-        tmp = line[i];
-        cout << "["<<i<<"]:";
-        cout <<"("<<tmp.GetPointX() << "," << tmp.GetPointY()<<")"<<endl;
-    }
+    line.show_all_tops();
 }
 
 template <class T>

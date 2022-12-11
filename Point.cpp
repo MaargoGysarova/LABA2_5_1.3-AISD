@@ -32,6 +32,11 @@ Point<T>::Point(const Point &it)
 	this->y = it.y;
 }
 
+template <class T>
+ostream& operator<<(ostream& out, const Point<T>& src)
+{
+	return (out << "(" << src.GetPointX << ";" << src.GetPointY << ")");
+}
 
 
 template <class T>

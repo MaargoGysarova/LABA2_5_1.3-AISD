@@ -22,6 +22,7 @@ public:
 
     Point(const Point &it);
     
+    friend ostream& operator << (ostream& out, const Point<T>& src);
 
 
     explicit Point(T x=0,T y=0);

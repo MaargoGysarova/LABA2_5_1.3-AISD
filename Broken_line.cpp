@@ -8,7 +8,8 @@
 
 template <class T>
 Broken_line<T>::Broken_line(unsigned int grow_size,unsigned int size):size(1),counter(0),grow_size(grow_size) {
-   this->size=size;
+    this->size = size;
+
 }
 
 template <class T>
@@ -66,46 +67,16 @@ Broken_line<T> Broken_line<T>::operator+(const Broken_line<T>&second_line) {
 
 template <class T>
 Broken_line<T> &Broken_line<T>::operator+=(const Point<T> &src)  {
-    if(counter==size) {
-        Point<T> *tmp;
-        tmp = new Point<T>[this->size + grow_size];
-        for (int i = 0; i < size; i++) {
-            tmp[i] = points[i];
-        }
-        tmp[size] = src;
-        for (int i = 0; i < this->counter; i++) {
-            points[i] = tmp[i];
-        }
-    }
-    else {
-        points.push_back(src);
-    }
+    
+    points.push_back(src);
     counter++;
     return *this;
 }
 
 template <class T>
 Broken_line<T> &Broken_line<T>::operator+(const Point<T> &src) {
-    Point<T> *tmp;
-    if(counter==size) {
-        tmp = new Point<T>[this->size + grow_size];
-        tmp[0]=src;
-        for (int i = 1; i < this->counter + 1; i++) {
-            tmp[i] = points[i - 1];
-        
-        }
-    }
-    else{
-        tmp = new Point<T>[this->counter+1];
-        tmp[0]=src;
-        for (int i = 1; i<this->counter+1; i++) {
-            tmp[i] = points[i-1];
-        }
-    }
+    points.insert(points.begin(), src);
     this->counter++;
-    for (int i = 0; i < this->counter; i++) {
-        points[i] = tmp[i];
-    }
     return *this;
 }
 
@@ -113,16 +84,7 @@ template<class T>
 Broken_line<T>& Broken_line<T>::operator=(const Broken_line<T>& scr)
 {
     points.clear();
-	
-    this->size = scr.size;
-	//this->points.resize(this->size);
-	
-
-    
-    //for (int i = 0; i < scr.counter; i++) {
-      //  points[i] = *iter;
-      //  iter++;
-   // }
+	this->size = scr.size;
     for (auto iter = scr.cbegin(); iter != scr.cend(); ++iter) {
 		points.push_back(*iter);
     
@@ -134,10 +96,14 @@ Broken_line<T>& Broken_line<T>::operator=(const Broken_line<T>& scr)
 template <class T>
 double Broken_line<T>::get_length() const{
     double length=0;
+    int number=0;
     if(size>1) {
-        for (int i = 0; i < counter; i++) {
-            if (i == counter - 1) { length += Point<T>::GetDistance(points[i], points[0]); }
-            else { length += Point<T>::GetDistance(points[i], points[i + 1]); }
+        for (auto iter = cbegin(); iter != cend(); ++iter) {
+            if (number == counter - 1) { length += Point<T>::GetDistance(*(cbegin()+(counter-1)), *cbegin()); }
+            else { length += Point<T>::GetDistance(*iter, *(iter++)); iter--;
+            }
+            
+            number++;
         }
     }
     return length;
@@ -146,6 +112,20 @@ double Broken_line<T>::get_length() const{
 template <class T>
 int Broken_line<T>::get_counter() const {
     return (int)counter;
+}
+
+template<class T>
+void Broken_line<T>::show_all_tops() const
+{
+    int i = 1;
+    for (auto iter = cbegin(); iter != cend(); ++iter) {
+        cout << "[" << i << "]:";
+        i++;
+        Point<T> tmp = *iter;
+        cout << "(" << tmp.GetPointX()<< ";" << tmp.GetPointY() << ")" << endl;
+       // cout << tmp;
+    }
+
 }
 
 template <class T>
