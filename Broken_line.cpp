@@ -12,11 +12,19 @@ Broken_line<T>::Broken_line(unsigned int grow_size,unsigned int size):size(1),co
 
 }
 
+template<class T>
+Broken_line<T>::Broken_line(){}
+
+template<class T>
+Broken_line<T>::~Broken_line()
+{
+    points.clear();
+}
+
 template <class T>
 void Broken_line<T>::set_size(int new_size){
     this->size=new_size;
-    
-}
+ }
 
 template <class T>
 Point<T> Broken_line<T>::operator[](int index)const {
@@ -38,7 +46,7 @@ void Broken_line<T>::operator()(const Point<T>& value, int index) {
         throw std::out_of_range("Index out of range");
     auto iter = begin();
     if (index == 0) {
-		*iter = value;
+        *iter = value;
     }
     else {
         iter += index;
@@ -49,7 +57,7 @@ void Broken_line<T>::operator()(const Point<T>& value, int index) {
  
 template <class T>
 Broken_line<T> Broken_line<T>::operator+(const Broken_line<T>&second_line) {
-    Broken_line<T> line;
+    Broken_line<T> line(5);
 	line.points.reserve(this->size + second_line.size);
     for (auto iter = cbegin(); iter != cend(); ++iter)
      {

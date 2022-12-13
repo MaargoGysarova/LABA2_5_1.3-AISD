@@ -4,6 +4,13 @@
 #include <conio.h>
 #include "Graphics.h"
 
+int get_key_compl() {
+    int key = _getch();
+    if ((key == 49) || (key == 50) || (key == 51) || (key == 52) || (key == 53) || (key == 54) || (key == 55) || (key == 56) || (key == 57)) {
+        return key;
+    }
+}
+
 template <class Ñ>
 Ñ check_compl()
 {
@@ -156,6 +163,21 @@ void show_one_tops_compl(Broken_compl<C>& line) {
     cout << "(" << tmp.Get_Re() << "+i" << tmp.Get_Im() << ")" << endl;
 };
 
+int menu2_compl() {
+    cout << "What are you want to do? To press.." << endl;
+    cout << "1 - summarize with new line" << endl;
+    cout << "2 - Add new top to end" << endl;
+    cout << "3 - Add new top to start" << endl;
+    cout << "4 - Get length" << endl;
+    cout << "5 - Change one element" << endl;
+    cout << "6 - Show all tops" << endl;
+    cout << "7 - Show one top" << endl;
+    cout << "8 - Print image" << endl;
+    cout << "9 - Go out" << endl;
+    int m2;
+    m2 = get_key_compl();
+    return m2;
+}
 
 template <class C>
 int main_program_complex(int num_tops) {
@@ -175,8 +197,8 @@ int main_program_complex(int num_tops) {
     int m2;
     do {
         system("cls");
-        //m2 = menu2();
-        m2 = 54;
+        m2 = menu2_compl();
+        
 
         switch (m2) {
         case 49:
