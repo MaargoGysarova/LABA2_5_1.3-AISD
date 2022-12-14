@@ -27,10 +27,12 @@ public:
      auto cbegin() const { return points.cbegin(); }
      auto cend() const { return points.cend(); }
 
-     Broken_line<T>(); 
-     explicit Broken_line<T>(unsigned int grow_size=5,unsigned int size=1);
+     Broken_line<T>()=default; 
 
-     ~Broken_line<T>();
+     Broken_line<T>(const Broken_line& tmp) = default;
+     //explicit Broken_line<T>(unsigned int grow_size = 5, unsigned int size = 1);
+
+     ~Broken_line<T>()=default;
 
      void set_size(int new_size); 
 	

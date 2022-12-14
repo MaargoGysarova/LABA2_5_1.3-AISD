@@ -84,7 +84,7 @@ Broken_line<T> create_new_line(){
         cout << "Num of top = ";
         cin >> num_of_top;
     }
-    Broken_line<T> new_line(5,num_of_top);
+    Broken_line<T> new_line;
     Point<T> tmp(0, 0);
     int x=0,y=0;
     for(int i=0;i<num_of_top;i++){
@@ -243,7 +243,7 @@ bool check_regular_polygon(Broken_line<T>& line) {
 template <class T>
        int main_program(int num_tops) {
 		
-         Broken_line<T> line(5, num_tops+1);
+         Broken_line<T> line;
          Point<T> tmp(0,0);
          bool reg = false;
 		 bool sum_cheak = false;

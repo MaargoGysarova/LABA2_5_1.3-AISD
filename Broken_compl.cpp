@@ -44,7 +44,7 @@ void Broken_compl<C>::operator()(const Complex<C>& value, int index)
 }
 
 template<class C>
-Broken_compl<C>& Broken_compl<C>::operator+(const Broken_compl<C>& second_line)
+Broken_compl<C> Broken_compl<C>::operator+(const Broken_compl<C>& second_line)
 {
     Broken_compl<C> line(5);
     line.points_compl.reserve(this->size + second_line.size);

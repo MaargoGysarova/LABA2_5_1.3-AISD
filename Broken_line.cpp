@@ -5,22 +5,6 @@
 #include <vector>
 
 
-
-template <class T>
-Broken_line<T>::Broken_line(unsigned int grow_size,unsigned int size):size(1),counter(0),grow_size(grow_size) {
-    this->size = size;
-
-}
-
-template<class T>
-Broken_line<T>::Broken_line(){}
-
-template<class T>
-Broken_line<T>::~Broken_line()
-{
-    points.clear();
-}
-
 template <class T>
 void Broken_line<T>::set_size(int new_size){
     this->size=new_size;
@@ -57,15 +41,15 @@ void Broken_line<T>::operator()(const Point<T>& value, int index) {
  
 template <class T>
 Broken_line<T> Broken_line<T>::operator+(const Broken_line<T>&second_line) {
-    Broken_line<T> line(5);
+    Broken_line<T> line;
 	line.points.reserve(this->size + second_line.size);
-    for (auto iter = cbegin(); iter != cend(); ++iter)
+    for (auto iter: points)
      {
-     line.points.push_back(*iter);
+     line.points.push_back(iter);
     }
-    for (auto iter = second_line.cbegin(); iter != second_line.cend(); ++iter)
+    for (auto iter :second_line.points)
     {
-    line.points.push_back(*iter);
+    line.points.push_back(iter);
      }
 
     line.counter = this->counter + second_line.counter;
@@ -93,8 +77,8 @@ Broken_line<T>& Broken_line<T>::operator=(const Broken_line<T>& scr)
 {
     points.clear();
 	this->size = scr.size;
-    for (auto iter = scr.cbegin(); iter != scr.cend(); ++iter) {
-		points.push_back(*iter);
+    for (auto iter : scr.points) {
+		points.push_back(iter);
     
     }
 	counter = scr.counter;
